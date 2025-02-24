@@ -1,0 +1,9 @@
+[submodule "GraphQL"]
+	path = GraphQL
+	url = git@github.com:Bigbrotherx/KalimerosBot-GraphQl.git
+[submodule "DictService"]
+	path = DictService
+	url = git@github.com:Bigbrotherx/KalimerosBot-Dictionary.git
+[submodule "TelegramService"]
+	path = TelegramService
+	url = git@github.com:NataForova/kalimeros-telegram-bot.git
