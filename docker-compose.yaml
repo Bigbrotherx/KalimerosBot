@@ -1,0 +1,60 @@
+services:
+  graph_ql:
+    container_name: graph_ql
+    build: GraphQL/.
+    ports:
+      - "8000:8000"
+    networks:
+      - my_network
+
+  dictionary_service:
+    container_name: dictionary_service
+    build: DictService/.
+    networks:
+      - my_network
+    depends_on:
+      - db_dict
+
+  db_dict:
+    image: postgres:15
+    container_name: dictionary_db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: dictionary
+    volumes:
+      - pgdata_dict:/var/lib/postgresql/data
+    networks:
+      - my_network
+
+  telegram-bot:
+    build: TelegramService/.
+    container_name: telegram-bot
+    ports:
+      - "8085:8085"
+    depends_on:
+      - telegram-mongo
+    env_file:
+      - TelegramService/.env
+    networks:
+      - my_network
+
+  telegram-mongo:
+    image: mongo:latest
+    container_name: telegram-mongo
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: telegram-bot-service
+    volumes:
+      - mongodata:/data/db
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
+
+volumes:
+  pgdata_dict:
+  mongodata:
