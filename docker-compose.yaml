@@ -2,6 +2,7 @@ services:
   graph_ql:
     container_name: graph_ql
     build: GraphQL/.
+    restart: always
     ports:
       - "8000:8000"
     networks:
@@ -10,6 +11,7 @@ services:
   dictionary_service:
     container_name: dictionary_service
     build: DictService/.
+    restart: always
     networks:
       - my_network
     depends_on:
