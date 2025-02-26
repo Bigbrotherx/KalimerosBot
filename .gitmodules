@@ -7,3 +7,6 @@
 [submodule "TelegramService"]
 	path = TelegramService
 	url = git@github.com:NataForova/kalimeros-telegram-bot.git
+[submodule "KalimerosBot-Training"]
+	path = Training
+	url = git@github.com:Bigbrotherx/KalimerosBot-Training.git
